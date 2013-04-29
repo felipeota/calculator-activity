@@ -1,0 +1,9 @@
+[Activity]
+name = Calculator
+bundle_id = uy.ceibal.Calculator
+class = calculator_activity.CalculatorActivity
+icon = calculator
+activity_version = 1
+host_version = 1
+show_launcher = yes
+
