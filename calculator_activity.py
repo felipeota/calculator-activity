@@ -16,4 +16,5 @@ class CalculatorActivity(activity.Activity):
 
       self.calculator = Calculator(self.get_data('sugar-accel-group'))
       self.calculator.release_main_widget()
-      self.set_canvas(self.calculator.main_widget)
+      if self.calculator.main_widget != None:
+      	self.set_canvas(self.calculator.main_widget)
