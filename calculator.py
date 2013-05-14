@@ -54,7 +54,7 @@ class Calculator:
 			equal.connect("clicked", self.on_equal_clicked)
 			equal.add_accelerator("clicked", self.accel_group, gtk.keysyms.KP_Enter, 0, gtk.ACCEL_VISIBLE)
 
-		self.display = self.glade.get_object("display")
+		self.display = self.glade.get_object("label_display")
 		if self.display != None:
 			self.display.set_use_markup(True)
 			self.display_expression("0")

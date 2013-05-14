@@ -49,16 +49,25 @@ from picoparse import compose, p as partial
 from picoparse import one_of, many1, choice, tri, commit, optional, fail, follow
 from picoparse.text import run_text_parser, lexeme, build_string, whitespace, newline, as_string
 
-import operations
+import os
+
+def calculate(operation, a, b):
+    locals_dict = {'operation': operation, 'first_operand': a, 'second_operand': b}
+    execfile(os.path.dirname(__file__) + "/button_equal.py", {}, locals_dict)
+    if  "result" not in locals_dict:
+        raise Exception("Error: the 'result' variable has not been assigned")
+    result = locals_dict["result"]
+    if not isinstance(result, float) and not isinstance(result, int):
+        raise Exception("Error: the 'result' variable must contain a number")
+    return result
 
 # syntax tree classes
 operators = ['-','+','*','/']
-operator_functions = {
-    '-': operations.subtract,
-    '+': operations.add,
-    '*': operations.multiply,
-    '/': operations.divide,
-}
+operator_functions = {}
+for operator in operators:
+    def bind(operator):
+        operator_functions[operator] = lambda *a: calculate(operator, *a)
+    bind(operator)
     
 
 class ValueNode(object):
